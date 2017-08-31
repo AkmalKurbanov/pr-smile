@@ -1,0 +1,15 @@
+
+.flabio-people:before { content: '\e800'; } /* '' */
+.flabio-marker:before { content: '\e801'; } /* '' */
+.flabio-guaranteed:before { content: '\e802'; } /* '' */
+.flabio-refresh:before { content: '\e803'; } /* '' */
+.flabio-tooth:before { content: '\e804'; } /* '' */
+.flabio-clock:before { content: '\e805'; } /* '' */
+.flabio-fast:before { content: '\e806'; } /* '' */
+.flabio-info-outline:before { content: '\e807'; } /* '' */
+.flabio-home-outline:before { content: '\e808'; } /* '' */
+.flabio-quality:before { content: '\e809'; } /* '' */
+.flabio-price:before { content: '\e80a'; } /* '' */
+.flabio-phone:before { content: '\e80b'; } /* '' */
+.flabio-angle-left:before { content: '\f104'; } /* '' */
+.flabio-angle-right:before { content: '\f105'; } /* '' */
