@@ -1,0 +1,16 @@
+$icon-font-path: '../fonts/';
+@import "../fonts/inons/css/flabio.css";
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import "_helpers";
+@import "_header";
+@import "_main-form";
+@import "_advantages";
+@import "_result";
+@import "_comments";
+@import "_footer";
+@import "_contacts";
+@import "_about";
+@import "_steps";

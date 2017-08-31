@@ -1,0 +1,26 @@
+.contacts{
+	&__map {
+		width: 100%;
+		position: relative;
+		min-height: 315px;
+		text-align: left;
+		padding-top: 90px;
+		@media (max-width: $screen-xs-max) {
+			padding: 0;
+			margin: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			@media (max-width: $screen-xs-max) {
+				position: relative;
+				height: 300px;
+				margin-bottom: 10px;
+			}
+		}
+	}
+}
