@@ -1,0 +1,184 @@
+.slider {
+  width: 100%;
+  overflow: hidden;    
+  color: #fff;
+  position: relative;
+  height: 420px;
+
+  @media (min-width: $screen-sm-min) { 
+    height: 520px;
+  }
+  @media (min-width: $screen-md-min) { 
+    height: 420px;
+  }
+
+  .imag-wrap{
+    height: 270px;
+    overflow: hidden;
+    @media (max-width: $screen-xs-max){
+      height: 170px;
+    }
+  }
+  ul {
+    width: calc(100% * 7);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    li {
+      width: calc(100% / 7);
+      float: left;
+      position: relative;
+      list-style-type: none;
+      .cont {        
+        color:#000;
+        overflow: hidden;
+        padding-top: 50px;
+
+        img{
+          width: 100%;
+        }
+        p{
+          font-size: 18px;
+          font-weight: 100;
+          line-height: 30px;
+          @media (min-width: $screen-md-min) {
+            line-height: 25px;
+          }
+          @media (max-width: $screen-xs-max){
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+      }
+
+    }
+  }
+  ol, .control .fa {
+    position: absolute;
+  }
+  ol {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 0;
+    width: 100%;
+    @media (min-width: $screen-md-min) { 
+      transform: translate(-45%);
+    }   
+    @media (max-width: $screen-md-max) { 
+     top: 90%;
+     transform: translate(-40%);
+   }
+   @media (max-width: $screen-xs-max) {
+    transform: translate(-50%);
+  }
+  li{
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 120px;
+    background-color: #d1d1d1;
+    border-radius: 10em;
+    width: 52px;
+    height: 52px;
+    text-align: center;
+    line-height: 52px;
+    list-style-type: none;
+    position: relative;
+    @media (min-width: $screen-md-min) { 
+      margin-left: 100px;
+    }
+    @media (max-width: $screen-md-max) { 
+      margin-left: 50px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+    }
+    @media (max-width: $screen-xs-max) { 
+     width: 30px;
+     height: 30px;
+     line-height: 30px;
+     margin-left: 5px;
+   }
+
+
+   &:after{
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 80px;
+    background-color: #d1d1d1;
+    left: 120%;
+    top: 50%;
+    @media (max-width: $screen-md-max) { 
+      width: 35px;
+    }
+    @media (max-width: $screen-sm-max) { 
+        // top: 100px;       
+      }
+      @media (max-width: $screen-xs-max) {
+        width: 0;
+      }
+    }
+    &:first-child{
+
+    }
+    &:last-child{
+
+     &:after{
+      background:transparent;
+    }
+
+  }
+  &.active{
+    background-color: $main-color;
+  }
+  &:hover{
+    background-color: $main-color;
+  }
+  i{
+    display: block;
+    font-style: normal;
+    font-size: 24px;
+    @media (max-width: $screen-sm-max) { 
+     font-size: 16px;  
+   }
+
+ }
+}
+}
+.control .fa {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10em;
+  text-align: center;
+  line-height: 40px;
+  color: #000;
+  border: 1px solid $main-color;
+  &:first-of-type {
+    left: 51%;
+    top: 47%;
+    @media (max-width: $screen-sm-max) { 
+      left: 15%;
+      top: 65%;
+    }
+    @media (max-width: $screen-xs-max){
+      left: 50%;
+      top: 57%;
+    }
+  }
+  &:last-of-type {
+    left: 56%;
+    top: 47%;
+    @media (max-width: $screen-sm-max) { 
+      left: 23%;
+      top: 65%;
+    }
+    @media (max-width: $screen-xs-max){
+      left: 70%;
+      top: 57%;
+    }
+  }
+  cursor: pointer;
+}
+}

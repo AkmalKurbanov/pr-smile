@@ -1,6 +1,6 @@
 .main-form{
 	background-image: url('../images/main-form.jpg');
-	background-position: center bottom;
+	background-position: left;
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: 615px;
@@ -35,7 +35,6 @@
 				padding: 6px 10px;
 				color: #fff;
 				margin: 0 8px;
-				box-shadow: 0px 8px 16px 0px rgba(244, 194, 45, 0.44);
 				@media (max-width: $screen-xs-min) {
 					display: block;
 					max-width: 160px;
@@ -65,7 +64,7 @@
 	&__form{
 		border-radius: 10px;
 		background-color: rgb(255, 255, 255);
-		box-shadow: 0px 22px 21px 0px rgba(240, 240, 240, 0.004);
+		box-shadow: 0px 22px 21px 0px rgba(240, 240, 240, 0.4);
 		max-width: 594px;
 		width: 100%;
 		min-height: 196px;

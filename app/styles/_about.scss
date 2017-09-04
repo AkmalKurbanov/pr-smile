@@ -1,32 +1,35 @@
 .about{
 	padding-bottom: 40px;
 	padding-top: 30px;
+	@media (max-width: $screen-md-max){
+		padding-top: 10px;
+		padding-bottom: 30px;
+	}
+	@media (max-width: $screen-xs-max){
+		padding-bottom: 0;
+	}
 	.caption{
 		@media (max-width: $screen-xs-max){
 			font-size: 17px;
 		}
 	}
-	@media (max-width: $screen-md-max){
-		padding-top: 10px;
-		padding-bottom: 30px;
-	}
-	&__owl-carousel{
-		padding-top: 80px;
-		@media (max-width: $screen-md-max) {
+	&__content{
+		padding-top: 75px;
+		@media (max-width: $screen-xs-max){
 			padding-top: 30px;
 		}
-		@media (max-width: $screen-xs-max){
-			padding-top: 20px;
-		}
+	}
+	&__owl-carousel{
 		.owl-dots {
 			left: 50%;
-			transform: translateX(-28%);
+			transform: translateX(-5%);
 			position: relative;
 			top: 20px;
 			@media (max-width: $screen-md-max) {
 				text-align: center;
 				transform: translateX(0);
 				left: 0;
+				top: 0;
 			}
 			.owl-dot {
 				width: 20px;
@@ -68,7 +71,7 @@
 		max-width: 100%;
 		min-height: 335px;
 		@media (max-width: $screen-md-max) {
-			padding-bottom: 20px;
+			padding-bottom: 20px;			
 		}
 		@media (max-width: $screen-xs-max){
 			min-height: 200px;
@@ -83,13 +86,20 @@
 		margin-top: 40px;
 		display: inline-block;
 		img{
-			transform: scale(1.3);
+			transform: scale(1.2);
+			width: 100%;
+			max-width: 100%;
 		}
 		@media (max-width: $screen-md-max) {
 			margin-top: 0;
 		}
 	}
 	&__desc{
+		@media (max-width: $screen-md-max) {
+			padding-top: 20px;
+		}	@media (max-width: $screen-sm-max) {
+			padding-top: 5px;
+		}
 		p{
 			font-size: 18px;
 			line-height: 30px;
