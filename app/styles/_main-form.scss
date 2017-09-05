@@ -4,6 +4,15 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: 615px;
+	@media screen and (min-width: 992px) and (max-width: 1500px)  {
+		background-position: -220px 0;
+	}
+	@media (max-width: $screen-sm-max) {
+		background-image: url('../images/change_bg.jpg');
+		background-position: center top;
+		background-size: cover;
+		min-height: 500px;
+	}
 	@media (max-width: $screen-sm-max) {
 		text-align: center;
 	}
