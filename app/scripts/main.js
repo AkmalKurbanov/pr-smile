@@ -42,6 +42,98 @@ $(function() {
   })
 
 
+
+
+
+
+$(document).ready(function() {
+
+  var sync1 = $('#sync1');
+  var sync2 = $('#sync2');
+  var slidesPerPage = 4; //globaly define number of elements per page
+  var syncedSecondary = true;
+
+  sync1.owlCarousel({
+    items : 1,
+    slideSpeed : 2000,
+    nav: true,
+    autoplay: false,
+    dots: false,
+    loop: true,
+    responsiveRefreshRate : 200,
+     
+    navText: ['<i class="flabio-angle-left"></i>', '<i class="flabio-angle-right"></i>'],
+  }).on('changed.owl.carousel', syncPosition);
+
+  sync2
+    .on('initialized.owl.carousel', function () {
+      sync2.find('.owl-item').eq(0).addClass('current');
+    })
+    .owlCarousel({
+    items : 6,
+    dots: true,
+    nav: false,
+    smartSpeed: 200,
+    slideSpeed : 500,
+    mouseDrag: false,
+    slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+    responsiveRefreshRate : 100
+  }).on('changed.owl.carousel', syncPosition2);
+
+  function syncPosition(el) {
+    //if you set loop to false, you have to restore this next line
+    //var current = el.item.index;
+    
+    //if you disable loop you have to comment this block
+    var count = el.item.count-1;
+    var current = Math.round(el.item.index - (el.item.count/2) - .5);
+    
+    if(current < 0) {
+      current = count;
+    }
+    if(current > count) {
+      current = 0;
+    }
+    
+    //end block
+
+    sync2
+      .find('.owl-item')
+      .removeClass('current')
+      .eq(current)
+      .addClass('current');
+    var onscreen = sync2.find('.owl-item.active').length - 1;
+    var start = sync2.find('.owl-item.active').first().index();
+    var end = sync2.find('.owl-item.active').last().index();
+    
+    if (current > end) {
+      sync2.data('owl.carousel').to(current, 100, true);
+    }
+    if (current < start) {
+      sync2.data('owl.carousel').to(current - onscreen, 100, true);
+    }
+  }
+  
+  function syncPosition2(el) {
+    if(syncedSecondary) {
+      var number = el.item.index;
+      sync1.data('owl.carousel').to(number, 100, true);
+    }
+  }
+  
+  sync2.on('click', '.owl-item', function(e){
+    e.preventDefault();
+    var number = $(this).index();
+    sync1.data('owl.carousel').to(number, 300, true);
+  });
+});
+
+
+
+
+
+
+
   //E-mail Ajax Send
   $('form').submit(function() { //Change
     var th = $(this);
@@ -208,112 +300,13 @@ $(function() {
     };
   }
 
-$(function() {
-    // All Variable =======================================================================
-    var body        = $('body'),
-        slider      = $('.slider'),
-        sliderUl    = slider.find('ul'),
-        sliderUlLi  = sliderUl.find('li'),
-        sliderOl    = slider.find('ol'),
-        sliderOlLi  = sliderOl.find('li'),
-        controlFa   = $('.control .fa'),
-        sliderTime  = 900,
-        sliderWait  = 4000,
-        clickHere   = 'yes click',
-        autoPlay;
 
-    // All Functions =====================================================================
-    sliderUl.append('<li>' + sliderUlLi.first().html() + '</li>');
-    sliderUl.prepend('<li>' + sliderUlLi.last().html() + '</li>');
-    
-    function runSlider() {
-        if (clickHere === 'yes click') {
-            clickHere = 'no click';
-            sliderUl.animate({
-                marginLeft: -sliderUlLi.width() * ($('.slider .active').index() + 1)
-            }, sliderTime, function () { clickHere = 'yes click'; });
-        }
-    }
-    function addActive(param) {
-        if (clickHere === 'yes click') {
-            param.addClass('active').siblings('li').removeClass('active');
-        }
-    }
 
-    // Click Point =======================================================================
-    sliderOlLi.on('click', function() {
-        addActive($(this));
-        runSlider();
-    });
 
-    // Click Arrow Left
-    controlFa.first().on('click', function() {
-        if ($('.slider .active').is(':first-of-type')) {
-            addActive(sliderOlLi.last());
-            if (clickHere === 'yes click') {
-                clickHere = 'no click';
-                sliderUl.animate({
-                    marginLeft: '+=' + sliderUlLi.first().width()
-                }, sliderTime, function() {
-                    sliderUl.css( 'margin-left', -sliderUlLi.width() * ($('.slider .active').index() + 1));
-                    clickHere = 'yes click';
-                });
-            }
-        } else {
-            addActive($('.slider .active').prev('li'));
-            runSlider();
-        }
-    });
 
-    // Click Arrow Right
-    controlFa.last().on('click', function() {
-        if ($('.slider .active').is(':last-of-type')) {
-            addActive(sliderOlLi.first());
-            if (clickHere === 'yes click') {
-                clickHere = 'no click';
-                sliderUl.animate({
-                    marginLeft: '-=' + sliderUlLi.first().width()
-                }, sliderTime, function() { 
-                    sliderUl.css('margin-left', -sliderUlLi.width() * ($('.slider .active').index() + 1));
-                    clickHere = 'yes click';
-                });
-            }
-        } else {
-            addActive($('.slider .active').next('li'));
-            runSlider();
-        }
-    });
-                
-    // Start Set =======================================================================
-    sliderOlLi.first().click();
-    
-    // Keyboard ========================================================================
-    $('body').keydown(function(e) {
-        if (e.keyCode == 37) { // left
-            controlFa.first().click();
-        } else if (e.keyCode == 39) { // right
-            controlFa.last().click();
-        }
-    });
 
-    // Auto Run Slider ==============================================================
-    // function autoRunSlider() {
-    //     if (body.css('direction') === 'ltr') {
-    //         autoPlay = setInterval(function() { controlFa.last().click(); }, sliderWait);
-    //     } else if (body.css('direction') === 'rtl') {
-    //         autoPlay = setInterval(function() { controlFa.first().click(); }, sliderWait);
-    //     }
-    // }
-    // autoRunSlider();
-    
-    // When Hover fa ==============================================================
-    // slider.find('.fa').on('mouseenter', function() { clearInterval(autoPlay); });
-    // slider.find('.fa').on('mouseleave', function() { autoRunSlider(); });
-});
 
-// Em An
-// 8-2017
-// https://codepen.io/collection/AGNJNB
+
 
 });
 

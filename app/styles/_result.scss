@@ -4,6 +4,12 @@
 	@media (max-width: $screen-sm-max){
 		padding-bottom: 50px;
 	}
+	.first-result{
+		float: right;
+	}
+	.second-result{
+		float: left;
+	}
 	&__slide{
 		background-repeat: no-repeat;
 	}
