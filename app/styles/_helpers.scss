@@ -260,13 +260,32 @@ body{
 	background: #0000ff;   
 }
 
-
-
-
-
-
-
-
+.size2 {
+    padding: 15px;
+    max-width: 545px;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .popup__submit {
+    border: 4px #b0e146 solid;
+    border-radius: 5px;
+    padding: 15px;
+}
+}
+.size2 .mfp-close {
+    margin-right: -40px;
+    margin-top: -40px;
+    border: none;
+    color: #b0e146;
+    font-size: 40px;
+    opacity: 100;
+}
 
 
 

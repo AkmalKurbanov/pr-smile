@@ -132,21 +132,22 @@ $(document).ready(function() {
 
 
 
-
-
   //E-mail Ajax Send
-  $('form').submit(function() { //Change
+    $('form').submit(function() {
     var th = $(this);
     $.ajax({
-      type: 'POST',
-      url: '../mail.php', //Change
+      type: "POST",
+      url: "mail.php",
       data: th.serialize()
     }).done(function() {
-      alert('Thank you!');
-      setTimeout(function() {
-        // Done Functions
-        th.trigger('reset');
-      }, 1000);
+      $.magnificPopup.open({
+        items: {
+          src: '#submite',
+          type: 'inline'
+        },
+        midClick: true,
+        closeMarkup: '<button title="%title%" type="button" class="mfp-close"></button>'
+      });
     });
     return false;
   });

@@ -1,1 +1,275 @@
-"use strict";$(function(){$(".js-show").on("click",function(e){e.preventDefault(),$(".js-hidden-content").slideDown()}),$(".js-slide").owlCarousel({loop:!0,margin:20,nav:!0,items:2,dots:!1,slideBy:2,navText:['<i class="flabio-angle-left"></i>','<i class="flabio-angle-right"></i>']}),$(".js-about-slide").owlCarousel({loop:!0,margin:10,nav:!1,items:1,dots:!0}),$(".js-step-slider").owlCarousel({loop:!0,margin:10,nav:!0,items:1,navText:['<i class="flabio-angle-left"></i>','<i class="flabio-angle-right"></i>'],dotsContainer:".steps__thumbnail",dots:!1,thumbs:!0,thumbsPrerendered:!0}),$(document).ready(function(){function e(e){var t=e.item.count-1,a=Math.round(e.item.index-e.item.count/2-.5);a<0&&(a=t),a>t&&(a=0),o.find(".owl-item").removeClass("current").eq(a).addClass("current");var n=o.find(".owl-item.active").length-1,i=o.find(".owl-item.active").first().index();a>o.find(".owl-item.active").last().index()&&o.data("owl.carousel").to(a,100,!0),a<i&&o.data("owl.carousel").to(a-n,100,!0)}function t(e){if(n){var t=e.item.index;a.data("owl.carousel").to(t,100,!0)}}var a=$("#sync1"),o=$("#sync2"),n=!0;a.owlCarousel({items:1,slideSpeed:2e3,nav:!0,autoplay:!1,dots:!1,loop:!0,responsiveRefreshRate:200,navText:['<i class="flabio-angle-left"></i>','<i class="flabio-angle-right"></i>']}).on("changed.owl.carousel",e),o.on("initialized.owl.carousel",function(){o.find(".owl-item").eq(0).addClass("current")}).owlCarousel({items:6,dots:!0,nav:!1,smartSpeed:200,slideSpeed:500,mouseDrag:!1,slideBy:4,responsiveRefreshRate:100}).on("changed.owl.carousel",t),o.on("click",".owl-item",function(e){e.preventDefault();var t=$(this).index();a.data("owl.carousel").to(t,300,!0)})}),$("form").submit(function(){var e=$(this);return $.ajax({type:"POST",url:"../mail.php",data:e.serialize()}).done(function(){alert("Thank you!"),setTimeout(function(){e.trigger("reset")},1e3)}),!1}),$(".popup-content").magnificPopup({type:"inline"}),$("#js-nav a").on("click",function(e){e.preventDefault();var t=$(this).attr("href"),a=$(t).offset().top;$("html, body").animate({scrollTop:a-0},500)}),new WOW({boxClass:"wow",animateClass:"animated",offset:0,mobile:!0,live:!0,callback:function(e){},scrollContainer:null}).init(),$(".js-phone").mask("+7 (999) 999-99-99"),$(".header__nav ul").clone().appendTo(".mmenu-nav");var e=$(".mmenu-nav").mmenu({navbar:{title:"Меню"},extensions:["fx-menu-slide","fx-listitems-slide","border-full","pagedim-black"],offCanvas:{position:"right"},counters:!0}),t=$(".js-navtrigger"),a=e.data("mmenu");if(t.on("click",function(){a.open()}),a.bind("open:start",function(e){$(".js-navtrigger").toggleClass("-active")}),a.bind("close:start",function(e){$(".js-navtrigger").toggleClass("-active")}),Modernizr.mq("(max-width: 767px)")){var o=function(e){if($("#map").html(""),n=new ymaps.Map("map",{controls:["zoomControl","fullscreenControl","geolocationControl"],center:[59.925655,30.312032],behaviors:["drag"],zoom:17}),!e.type)return i=new ymaps.Placemark([59.925655,30.312032],{balloonContentHeader:"",balloonContentBody:""}),n.geoObjects.add(i),!0};$('a.-pagescroll[href*="#"]:not([href="#"])').click(function(){if(a.close(),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname){var e=$(this.hash);if(e=e.length?e:$("[name="+this.hash.slice(1)+"]"),e.length)return $("html, body").animate({scrollTop:e.offset().top},1e3),!0}});var n,i;ymaps.ready(o)}else{var l=function(e){if($("#map").html(""),n=new ymaps.Map("map",{controls:["zoomControl","fullscreenControl","geolocationControl"],center:[59.925655,30.312032],behaviors:["drag"],zoom:17}),!e.type)return i=new ymaps.Placemark([59.925655,30.312032],{balloonContentHeader:"",balloonContentBody:"г. Санкт-Петербург, м. Садовая, наб. канала Грибоедова, 70"}),n.geoObjects.add(i),!0};$('a.-pagescroll[href*="#"]:not([href="#"])').click(function(){if(location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname){var e=$(this.hash);if(e=e.length?e:$("[name="+this.hash.slice(1)+"]"),e.length)return $("html, body").animate({scrollTop:e.offset().top},1e3),!0}});var n,i;ymaps.ready(l)}});
+'use strict';
+
+$(function () {
+
+  $('.js-show').on('click', function (e) {
+    e.preventDefault();
+    $('.js-hidden-content').slideDown();
+  });
+
+  $('.js-slide').owlCarousel({
+    loop: true,
+    margin: 20,
+    nav: true,
+    items: 2,
+    dots: false,
+    slideBy: 2,
+    navText: ['<i class="flabio-angle-left"></i>', '<i class="flabio-angle-right"></i>']
+
+  });
+
+  $('.js-about-slide').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: false,
+    items: 1,
+    dots: true
+
+  });
+
+  $('.js-step-slider').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: true,
+    items: 1,
+    navText: ['<i class="flabio-angle-left"></i>', '<i class="flabio-angle-right"></i>'],
+    dotsContainer: '.steps__thumbnail',
+    dots: false,
+    thumbs: true,
+    thumbsPrerendered: true
+  });
+
+  $(document).ready(function () {
+
+    var sync1 = $('#sync1');
+    var sync2 = $('#sync2');
+    var slidesPerPage = 4; //globaly define number of elements per page
+    var syncedSecondary = true;
+
+    sync1.owlCarousel({
+      items: 1,
+      slideSpeed: 2000,
+      nav: true,
+      autoplay: false,
+      dots: false,
+      loop: true,
+      responsiveRefreshRate: 200,
+
+      navText: ['<i class="flabio-angle-left"></i>', '<i class="flabio-angle-right"></i>']
+    }).on('changed.owl.carousel', syncPosition);
+
+    sync2.on('initialized.owl.carousel', function () {
+      sync2.find('.owl-item').eq(0).addClass('current');
+    }).owlCarousel({
+      items: 6,
+      dots: true,
+      nav: false,
+      smartSpeed: 200,
+      slideSpeed: 500,
+      mouseDrag: false,
+      slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+      responsiveRefreshRate: 100
+    }).on('changed.owl.carousel', syncPosition2);
+
+    function syncPosition(el) {
+      //if you set loop to false, you have to restore this next line
+      //var current = el.item.index;
+
+      //if you disable loop you have to comment this block
+      var count = el.item.count - 1;
+      var current = Math.round(el.item.index - el.item.count / 2 - .5);
+
+      if (current < 0) {
+        current = count;
+      }
+      if (current > count) {
+        current = 0;
+      }
+
+      //end block
+
+      sync2.find('.owl-item').removeClass('current').eq(current).addClass('current');
+      var onscreen = sync2.find('.owl-item.active').length - 1;
+      var start = sync2.find('.owl-item.active').first().index();
+      var end = sync2.find('.owl-item.active').last().index();
+
+      if (current > end) {
+        sync2.data('owl.carousel').to(current, 100, true);
+      }
+      if (current < start) {
+        sync2.data('owl.carousel').to(current - onscreen, 100, true);
+      }
+    }
+
+    function syncPosition2(el) {
+      if (syncedSecondary) {
+        var number = el.item.index;
+        sync1.data('owl.carousel').to(number, 100, true);
+      }
+    }
+
+    sync2.on('click', '.owl-item', function (e) {
+      e.preventDefault();
+      var number = $(this).index();
+      sync1.data('owl.carousel').to(number, 300, true);
+    });
+  });
+
+  //E-mail Ajax Send
+  $('form').submit(function () {
+    var th = $(this);
+    $.ajax({
+      type: "POST",
+      url: "mail.php",
+      data: th.serialize()
+    }).done(function () {
+      $.magnificPopup.open({
+        items: {
+          src: '#submite',
+          type: 'inline'
+        },
+        midClick: true,
+        closeMarkup: '<button title="%title%" type="button" class="mfp-close"></button>'
+      });
+    });
+    return false;
+  });
+
+  $('.popup-content').magnificPopup({
+    type: 'inline'
+  });
+
+  $('#js-nav a').on('click', function (e) {
+
+    e.preventDefault();
+
+    var currentBlock = $(this).attr('href'),
+        currentBlockOffset = $(currentBlock).offset().top;
+
+    $('html, body').animate({
+      scrollTop: currentBlockOffset - 0
+    }, 500);
+  });
+
+  var wow = new WOW({
+    boxClass: 'wow', // animated element css class (default is wow)
+    animateClass: 'animated', // animation css class (default is animated)
+    offset: 0, // distance to the element when triggering the animation (default is 0)
+    mobile: true, // trigger animations on mobile devices (default is true)
+    live: true, // act on asynchronously loaded content (default is true)
+    callback: function callback(box) {
+      // the callback is fired every time an animation is started
+      // the argument that is passed in is the DOM node being animated
+    },
+    scrollContainer: null // optional scroll container selector, otherwise use window
+  });
+  wow.init();
+
+  $('.js-phone').mask('+7 (999) 999-99-99');
+
+  $('.header__nav ul').clone().appendTo('.mmenu-nav');
+
+  var $menu = $('.mmenu-nav').mmenu({
+    navbar: {
+      title: 'Меню'
+    },
+    extensions: ['fx-menu-slide', 'fx-listitems-slide', 'border-full', 'pagedim-black'],
+    offCanvas: {
+      'position': 'right'
+    },
+    counters: true
+  });
+
+  var $icon = $('.js-navtrigger');
+  var API = $menu.data('mmenu');
+
+  $icon.on('click', function () {
+    API.open();
+  });
+
+  API.bind('open:start', function ($panel) {
+    $('.js-navtrigger').toggleClass('-active');
+  });
+
+  API.bind('close:start', function ($panel) {
+    $('.js-navtrigger').toggleClass('-active');
+  });
+
+  if (Modernizr.mq('(max-width: 767px)')) {
+    var init = function init(data) {
+      $('#map').html('');
+      myMap = new ymaps.Map('map', {
+        controls: ['zoomControl', 'fullscreenControl', 'geolocationControl'],
+        center: [59.925655, 30.312032],
+        behaviors: ['drag'],
+        zoom: 17
+      });
+
+      if (!data.type) {
+        myPlacemark = new ymaps.Placemark([59.925655, 30.312032], {
+          balloonContentHeader: '',
+          balloonContentBody: ''
+
+        });
+        myMap.geoObjects.add(myPlacemark);
+        return true;
+      };
+    };
+
+    $('a.-pagescroll[href*="#"]:not([href="#"])').click(function () {
+      API.close();
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return true;
+        }
+      }
+    });
+    var myMap, myPlacemark;
+
+    ymaps.ready(init);
+
+    ;
+  } else {
+    var _init = function _init(data) {
+      $('#map').html('');
+      myMap = new ymaps.Map('map', {
+        controls: ['zoomControl', 'fullscreenControl', 'geolocationControl'],
+        center: [59.925655, 30.312032],
+        behaviors: ['drag'],
+        zoom: 17
+      });
+
+      if (!data.type) {
+        myPlacemark = new ymaps.Placemark([59.925655, 30.312032], {
+          balloonContentHeader: '',
+          balloonContentBody: 'г. Санкт-Петербург, м. Садовая, наб. канала Грибоедова, 70'
+        });
+        myMap.geoObjects.add(myPlacemark);
+        return true;
+      };
+    };
+
+    $('a.-pagescroll[href*="#"]:not([href="#"])').click(function () {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return true;
+        }
+      }
+    });
+    var myMap, myPlacemark;
+
+    ymaps.ready(_init);
+
+    ;
+  }
+});
